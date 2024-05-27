@@ -1,0 +1,36 @@
+Front-end (Login request ) -> API ->Token 
+-If front-end receives token then login successful.
+- Front-end decodes after what to decodes
+
+                             1] register
+user        <--------------- 2] login
+                 Token
+
+                              {below can acces  only if there is token}
+                               3] search
+                               4] track food
+
+    - When we will login we will get a token
+    - To access rest edn-points we need to to verify that token 
+    -To access  3 and 4 we will create middleware which will verify the token.
+
+let foods = await trackingModel
+      .find({ user_id: userid })
+      .populate("user_id");
+
+      -> here populate find value of userid in entire database
+
+
+# SUMMARY OF PROJECT:
+       URL                               METHOD        DATA
+http://localhost:8000/register            Post   {name,email,password,age}              Registration of user
+
+http://localhost:8000/login               Post   {email,password}                       Login of user and getting token 
+
+http://localhost:8000/foods               Get                                           Get all food
+
+http://localhost:8000/foods/:name         Get                                           Get food based on name
+
+http://localhost:8000/track               Post   {user_id,food_id,eatendata,quantity }  Adding a food item for user
+
+http://localhost:8000/track/:user_id/:data  Get                                    Getting all the food items for user for                                                                                   for a particular data 
